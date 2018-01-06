@@ -9,15 +9,15 @@ var express     = require("express"),
     User        = require("./models/user"),
     seedDB      = require("./seeds"),
     flash       = require("connect-flash"),
-    methodOverride = require("method-override"),
-    moment      = require("moment-timezone");
+    methodOverride = require("method-override");
+   
     
 //requring routes
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index")
     
-mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect("mongodb://localhost/yelp_camp1");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");

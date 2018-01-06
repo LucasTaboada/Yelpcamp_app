@@ -1,7 +1,9 @@
-var express =require("express");
-    var middleWare = require("../middleware");
- var   Campground = require("../models/campgrounds");
-    var router  = express.Router({mergeParams: true});
+var express = require("express"),
+ middleWare = require("../middleware"),
+ Campground = require("../models/campgrounds"),
+    router  = express.Router({mergeParams: true}),
+     moment = require("moment");
+
 
     
 //INDEX - show all campgrounds
@@ -23,12 +25,13 @@ router.post("/",isLoggedIn, function(req, res){
     var image = req.body.image;
     var desc = req.body.description;
     var price = req.body.price;
+    var time = moment().format("MMM do, h:mm a");
     var author ={
         id: req.user._id,
-        username: req.user.username
-        
-    };
-    var newCampground = {name: name, image: image, description: desc, author:author, price:price}
+        username: req.user.username};
+
+  
+    var newCampground = {name: name, image: image, description: desc, author:author, price:price, created:time}
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){

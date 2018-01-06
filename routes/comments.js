@@ -1,9 +1,11 @@
-var express = require("express");
-var router  = express.Router({mergeParams: true});
-var Campground = require("../models/campgrounds");
-var Comment = require("../models/comments");
-var middleWare = require("../middleware");
-var moment = require('moment-timezone');
+var express = require("express"),
+    router  = express.Router({mergeParams: true}),
+ Campground = require("../models/campgrounds"),
+    Comment = require("../models/comments"),
+ middleWare = require("../middleware"),
+     moment = require("moment");
+
+
 
 
 //Comments New
@@ -36,6 +38,7 @@ router.post("/",middleWare.isLoggedIn,function(req, res){
                
                comment.author.id = req.user._id;
                comment.author.username = req.user.username;
+               comment.created = moment().format("MMM Do, h:mm a");
                comment.save();
                // save comment
                campground.comments.push(comment);
